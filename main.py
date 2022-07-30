@@ -3,8 +3,17 @@ from fastapi.responses import JSONResponse
 import mongodb_operations as mongodb
 from schemas import Order, TablesNumbersEnum, GetManyChecksResponse
 from exceptions import OrderInsertionError
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.post("/order/", status_code=status.HTTP_201_CREATED)
